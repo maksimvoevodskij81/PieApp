@@ -1,4 +1,5 @@
-﻿@model ShoppingCartViewModel
+﻿@using System.Globalization;
+@model ShoppingCartViewModel
 
 <h3 class="my-5">
     Shopping cart
@@ -19,10 +20,16 @@
                             <h5 class="card-text">@line.Amount x @line.Pie.Name</h5>
                             <div class="d-flex justify-content-between">
                                 <h6>@line.Pie.ShortDescription</h6>
-                                <h2>@line.Pie.Price.ToString("c")</h2>
+                                <h2>@line.Pie.Price.ToString("C", CultureInfo.CreateSpecificCulture("fr-FR"))</h2>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="text-center d-grid">
+                    <a class="btn btn-secondary" 
+                    asp-controller="ShoppingCart" 
+                    asp-action="RemoveFromShoppingCart"
+                   asp-route-pieId="@line.Pie.PieId"> <h4>Remove</h4></a>
                 </div>
             </div>
         }
@@ -31,7 +38,7 @@
         <div class="card shopping-cart-card p-3">
             <div class="row">
                 <h4 class="col">Total:</h4>
-                <h4 class="col text-end">@Model.ShoppingCartTotal.ToString("c")</h4>
+                <h4 class="col text-end">@Model.ShoppingCartTotal.ToString("C", CultureInfo.CreateSpecificCulture("fr-FR"))</h4>
             </div>
             <hr />
             <div class="text-center d-grid">
