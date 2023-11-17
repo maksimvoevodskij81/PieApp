@@ -9,10 +9,11 @@
 *.user
 *.userosscache
 *.sln.docstates
-
+*.xml
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
-
+idea/ 
+docker-compose.generated.override.yml
 # Mono auto generated files
 mono_crash.*
 

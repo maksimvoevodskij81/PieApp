@@ -6,12 +6,26 @@ namespace PieApp.Models
         public static void Seed(IApplicationBuilder applicationBuilder)
         {
             PieAppDbContext context = applicationBuilder.ApplicationServices.CreateScope().ServiceProvider.GetRequiredService<PieAppDbContext>();
-
+            EnsureDatabaseCreated(context);
+            SeedCategories(context);
+            SeedPies(context);
+        }
+        private static void EnsureDatabaseCreated(PieAppDbContext context)
+        {
+            // Ensure the database is created
+            context.Database.EnsureCreated();
+        }
+        private static void SeedCategories(PieAppDbContext context)
+        {
+            // Check if categories exist and add them if not
             if (!context.Categories.Any())
             {
                 context.Categories.AddRange(Categories.Select(c => c.Value));
+                context.SaveChanges();
             }
-
+        }
+        private static void SeedPies(PieAppDbContext context)
+        {
             if (!context.Pies.Any())
             {
                 context.AddRange

@@ -1,0 +1,36 @@
+﻿version: '3.8'
+
+networks:
+  net:
+    driver: bridge
+
+services:
+  database:
+    networks:
+      - net
+    container_name: app-db
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    ports:
+      - "1433:1433"  # Map host port to container port
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Password@12345# # Replace with a strong password
+
+  demoserverapp:
+    networks:
+      - net
+    container_name: pie-app
+    image: maksymvoiev/pie-app-image:ver7
+    build:
+      context: .
+      dockerfile: PieApp/Dockerfile
+    ports:
+      - "8080:80"  # Map host port to container port
+    depends_on:
+      - database
+    environment:
+      - ASPNETCORE_URLS=http://+:80
+      - DB_HOST=database
+      - DB_NAME=PieAppDocker
+      - DB_SA_PASSWORD=Password@12345#
+      - DB_PORT=1433

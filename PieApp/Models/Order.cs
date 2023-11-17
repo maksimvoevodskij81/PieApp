@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PieApp.Models
 {
@@ -59,6 +60,7 @@ namespace PieApp.Models
         public string Email { get; set; } = string.Empty;
 
         [BindNever]
+        [Column(TypeName = "decimal(18,2)")]
         public decimal OrderTotal { get; set; }
 
         [BindNever]

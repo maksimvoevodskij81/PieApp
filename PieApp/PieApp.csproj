@@ -21,4 +21,11 @@
     <Folder Include="Pages\App\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Properties\ServiceDependencies\PieApp20230117171028 - Web Deploy\mssql1.arm.json" />
+    <None Remove="Properties\ServiceDependencies\PieApp20230117171028 - Web Deploy\profile.arm.json" />
+    <None Remove="Properties\serviceDependencies.PieApp20230117171028 - Web Deploy.json" />
+    <None Remove="Properties\serviceDependencies.json" />
+  </ItemGroup>
+
 </Project>
